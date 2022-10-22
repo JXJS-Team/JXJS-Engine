@@ -16,6 +16,7 @@ class MainMenuState extends FlxState {
         "Credits",
         "Options",
         "Donate",
+        #if desktop "Toolbox" #end
     ];
 
 	// Don't change this
@@ -65,18 +66,11 @@ class MainMenuState extends FlxState {
                 #else
                 FlxG.openURL('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game');
                 #end
+            case "Toolbox":
+                FlxG.switchState(new states.editors.Toolbox());
 
         }
     }
-	public function switchSection(way:String) {
-		FlxG.sound.play(Paths.sound('scrollMenu'));
-		switch(others.Config.sectionCurSelected) {
-			case 1:
-				FlxG.switchState(new states.sections.mainmenu.DevSection());
-            case 2:
-                FlxG.switchState(new states.MainMenuState());
-		}
-	}
     override public function create() {
         super.create();
 
@@ -115,16 +109,6 @@ class MainMenuState extends FlxState {
 
         if (FlxG.keys.justPressed.UP) {
             changeItem("U");
-        }
-
-		if (FlxG.keys.justPressed.LEFT) {
-			switchSection("l");
-            others.Config.sectionCurSelected = others.Config.sectionCurSelected - 1;
-		}
-        
-        if (FlxG.keys.justPressed.RIGHT) {
-            switchSection("l"); // Arg is not used lol
-            others.Config.sectionCurSelected++;
         }
 
         if (FlxG.keys.justPressed.ENTER) {

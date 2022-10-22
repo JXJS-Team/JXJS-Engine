@@ -599,7 +599,7 @@ class PlayState extends MusicBeatState
 			add(scoreTxt);
 		}
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 19, 0, "FNF Cool Engine - v" + Application.current.meta.get('version') + ' Song: ' + SONG.song, 12);
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 19, 0, SONG.song, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat(Paths.font("Funkin.otf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -1570,6 +1570,8 @@ class PlayState extends MusicBeatState
 			{
 				FlxG.sound.music.pause();
 				vocals.pause();
+
+				openSubState(subState);
 			}
 
 			#if desktop
