@@ -3,7 +3,7 @@
 **FNF': Cool Engine is a modification of the original FNF' source code the mod includes new Options and better Graphics!!**
 ----------------------------------------------
 
-![](/art/cool-logo.png)
+![](/art/iconOG.png)
 ----------------------------------------------
 
 ## The Cool Engine Team Credits
