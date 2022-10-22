@@ -1,93 +1,60 @@
 package;
 
-#if MODS_ALLOWED
-import sys.io.File;
-import sys.FileSystem;
-#else
-import openfl.utils.Assets;
-#end
 import haxe.Json;
 import haxe.format.JsonParser;
-import Song;
+import states.ModsFreeplayState;
+import lime.utils.Assets;
+import states.ModsState;
 
 using StringTools;
 
 typedef StageFile = {
-	var directory:String;
-	var defaultZoom:Float;
-	var isPixelStage:Bool;
-
-	var boyfriend:Array<Dynamic>;
-	var girlfriend:Array<Dynamic>;
-	var opponent:Array<Dynamic>;
-	var hide_girlfriend:Bool;
-
-	var camera_boyfriend:Array<Float>;
-	var camera_opponent:Array<Float>;
-	var camera_girlfriend:Array<Float>;
-	var camera_speed:Null<Float>;
+    var name:String;
+    var defaultZoom:Float;
+    var stagePices:Array<Dynamic>;
+    var animationsData:Array<String>;
+    var intFrameslol:Array<Dynamic>;
+    var picesOffsets:Array<Dynamic>;
+    var alpha:Array<Dynamic>;
+    var scrollOffsets:Array<Dynamic>;
+    var antialiasing:Bool;
+    var animated:Array<Bool>;
+    var screenCenter:Bool;
 }
 
 class StageData {
-	public static var forceNextDirectory:String = null;
-	public static function loadDirectory(SONG:SwagSong) {
-		var stage:String = '';
-		if(SONG.stage != null) {
-			stage = SONG.stage;
-		} else if(SONG.song != null) {
-			switch (SONG.song.toLowerCase().replace(' ', '-'))
-			{
-				case 'spookeez' | 'south' | 'monster':
-					stage = 'spooky';
-				case 'pico' | 'blammed' | 'philly' | 'philly-nice':
-					stage = 'philly';
-				case 'milf' | 'satin-panties' | 'high':
-					stage = 'limo';
-				case 'cocoa' | 'eggnog':
-					stage = 'mall';
-				case 'winter-horrorland':
-					stage = 'mallEvil';
-				case 'senpai' | 'roses':
-					stage = 'school';
-				case 'thorns':
-					stage = 'schoolEvil';
-				case 'ugh' | 'guns' | 'stress':
-					stage = 'tank';
-				default:
-					stage = 'stage';
-			}
-		} else {
-			stage = 'stage';
+    public var name:String;
+    public var defaultZoom:Float;
+    public var stagePices:Array<Dynamic>;
+    public var animationsData:Array<String>;
+    public var picesOffsets:Array<Dynamic>;
+    public var intFrameslol:Array<Dynamic>;
+    public var scrollOffsets:Array<Dynamic>;
+    public var alpha:Array<Dynamic>;
+    public var animated:Array<Bool>;
+    public var antialiasing:Bool = true;
+    public var screenCenter:Bool = false;
+
+    public function new(name,defaultZoom,stagePices,screenCenter){
+        this.name = name;
+        this.defaultZoom = defaultZoom;
+        this.stagePices = stagePices;
+        this.screenCenter = screenCenter;
+    }
+
+    public static function loadFromJson(stage:String):StageFile {
+        var rawJson = null;
+		var jsonRawFile:String = ('assets/data/stages/$stage.json');
+		if(ModsFreeplayState.onMods && ModsState.usableMods[ModsState.modsFolders.indexOf(ModsFreeplayState.mod)] == true)
+			jsonRawFile = ('mods/${ModsFreeplayState.mod}/data/stages/$stage.json');
+
+		if(Assets.exists(jsonRawFile))
+			rawJson = Assets.getText(jsonRawFile).trim();
+
+		while (!rawJson.endsWith("}")){
+			rawJson = rawJson.substr(0, rawJson.length - 1);
 		}
 
-		var stageFile:StageFile = getStageFile(stage);
-		if(stageFile == null) { //preventing crashes
-			forceNextDirectory = '';
-		} else {
-			forceNextDirectory = stageFile.directory;
-		}
-	}
-
-	public static function getStageFile(stage:String):StageFile {
-		var rawJson:String = null;
-		var path:String = Paths.getPreloadPath('stages/' + stage + '.json');
-
-		#if MODS_ALLOWED
-		var modPath:String = Paths.modFolders('stages/' + stage + '.json');
-		if(FileSystem.exists(modPath)) {
-			rawJson = File.getContent(modPath);
-		} else if(FileSystem.exists(path)) {
-			rawJson = File.getContent(path);
-		}
-		#else
-		if(Assets.exists(path)) {
-			rawJson = Assets.getText(path);
-		}
-		#end
-		else
-		{
-			return null;
-		}
-		return cast Json.parse(rawJson);
-	}
+		return (cast haxe.Json.parse(rawJson).stage);
+    }
 }

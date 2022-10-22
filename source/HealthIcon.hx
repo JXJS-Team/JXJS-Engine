@@ -1,23 +1,58 @@
 package;
 
+import states.CacheState.ImageCache;
+import lime.utils.Assets;
 import flixel.FlxSprite;
-import openfl.utils.Assets as OpenFlAssets;
+import states.ModsState;
 
 using StringTools;
 
 class HealthIcon extends FlxSprite
 {
+	// rewrite using da new icon system as ninjamuffin would say it
 	public var sprTracker:FlxSprite;
-	private var isOldIcon:Bool = false;
-	private var isPlayer:Bool = false;
-	private var char:String = '';
+	public var threeicon:Int;
 
 	public function new(char:String = 'bf', isPlayer:Bool = false)
 	{
 		super();
-		isOldIcon = (char == 'bf-old');
-		this.isPlayer = isPlayer;
-		changeIcon(char);
+		loadChar4(char);		
+		updateIcon(char, isPlayer);
+	}
+
+	//this shit is for week 4 DX
+	public function loadChar4(char:String){
+		if(char.startsWith('bf') && !char.endsWith('pixel') && !char.endsWith('pixel-enemy'))
+			char = 'bf';
+		if(char.startsWith('mom'))
+			char = 'mom';
+	}
+
+	//not thad used, cuz normally you dont forget to set the same name to the icon XD
+	//put it if your dum, but this can brake loadChar4 function, so...
+	public function antiCrash(char:String){
+		if(char == null || !Assets.exists(Paths.image('icons/icon-' + char)))
+			char = 'face';
+		if(char == null || !Assets.exists(ModPaths.modIconImage('icon-' + char, states.ModsFreeplayState.mod)) && states.ModsFreeplayState.onMods)
+			char = 'face';
+	}
+
+	public function updateIcon(char:String = 'bf', isPlayer:Bool = false)
+	{
+		if ((!char.endsWith('pixel')) && (char.contains('-')))
+			char = char.substring(0, char.indexOf('-'));
+
+		antialiasing = true;
+		if(!states.ModsFreeplayState.onMods) 
+			loadGraphic(Paths.image('icons/icon-' + char), true, 150, 150);
+		else 
+			loadGraphic(ModPaths.modIconImage('icon-' + char, states.ModsFreeplayState.mod), true, 150, 150);
+
+		if (char.startsWith('bf'))
+			loadGraphic(Paths.image('icons/icon-bf'), true, 150, 150);
+		
+		animation.add('icon', [0, 1], 0, false, isPlayer);
+		animation.play('icon');
 		scrollFactor.set();
 	}
 
@@ -26,47 +61,6 @@ class HealthIcon extends FlxSprite
 		super.update(elapsed);
 
 		if (sprTracker != null)
-			setPosition(sprTracker.x + sprTracker.width + 12, sprTracker.y - 30);
-	}
-
-	public function swapOldIcon() {
-		if(isOldIcon = !isOldIcon) changeIcon('bf-old');
-		else changeIcon('bf');
-	}
-
-	private var iconOffsets:Array<Float> = [0, 0];
-	public function changeIcon(char:String) {
-		if(this.char != char) {
-			var name:String = 'icons/' + char;
-			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'icons/icon-' + char; //Older versions of psych engine's support
-			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'icons/icon-face'; //Prevents crash from missing icon
-			var file:Dynamic = Paths.image(name);
-
-			loadGraphic(file); //Load stupidly first for getting the file size
-			loadGraphic(file, true, Math.floor(width / 2), Math.floor(height)); //Then load it fr
-			iconOffsets[0] = (width - 150) / 2;
-			iconOffsets[1] = (width - 150) / 2;
-			updateHitbox();
-
-			animation.add(char, [0, 1], 0, false, isPlayer);
-			animation.play(char);
-			this.char = char;
-
-			antialiasing = ClientPrefs.globalAntialiasing;
-			if(char.endsWith('-pixel')) {
-				antialiasing = false;
-			}
-		}
-	}
-
-	override function updateHitbox()
-	{
-		super.updateHitbox();
-		offset.x = iconOffsets[0];
-		offset.y = iconOffsets[1];
-	}
-
-	public function getCharacter():String {
-		return char;
+			setPosition(sprTracker.x + sprTracker.width + 10, sprTracker.y - 30);
 	}
 }
