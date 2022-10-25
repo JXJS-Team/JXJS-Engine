@@ -36,7 +36,7 @@ class Toolbox extends FlxState {
         var daChoice = optionShit[curSelected - 1];
         switch(daChoice) {
             case "Load Mods":
-                FlxG.switchState(new states.ModsState());
+                FlxG.switchState(new states.MainMenuState());
         }
     }
 

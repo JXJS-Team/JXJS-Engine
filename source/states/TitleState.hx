@@ -27,7 +27,6 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
-import states.ModsState;
 import openfl.display.BitmapData as Bitmap;
 #if sys
 import sys.FileSystem;
@@ -62,6 +61,9 @@ class TitleState extends states.MusicBeatState
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menu/menuBGtitle'));
 		add(bg);
+
+
+
 
 		// DEBUG BULLSHIT
 
@@ -102,6 +104,12 @@ class TitleState extends states.MusicBeatState
 		#if desktop
 		DiscordClient.initialize();
 		#end
+
+		var versionShit2 = new FlxText(5, FlxG.height - 9, 0, 'JXJS Engine - V${Application.current.meta.get('version')}', 12);
+		versionShit2.scrollFactor.set();
+		versionShit2.setFormat(Paths.font("Funkin.otf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit2.y -= 20;
+		add(versionShit2);
 	}
 
 	var logoBl:FlxSprite;

@@ -95,7 +95,6 @@ class PlayState extends MusicBeatState
 	var detailsPausedText:String = "";
 	#end
 
-	private var modsArray:Array<ModsState> = [];
 
 	public var vocals:FlxSound;
 
@@ -322,51 +321,8 @@ class PlayState extends MusicBeatState
 				dialogue = dialogueFile('thornsDialogue');
 		}
 
-		if(states.ModsFreeplayState.onMods){
-			if (SONG.player1 == null) //To prevent the application from closing.
-				SONG.player1 = 'bf';
-			if (SONG.player2 == null)
-				SONG.player2 = 'dad';
-			if (SONG.gfVersion == null)
-				SONG.gfVersion = 'gf';
 
-			if (SONG.stage != null)
-			{
-				var STAGE:StageData.StageFile = StageData.loadFromJson(SONG.stage);
-				STAGE.name = SONG.stage;
-				for(i in 0... STAGE.stagePices.length){
-					var object:FlxSprite = new FlxSprite(0,0);
-					var curPice = STAGE.stagePices[i][0];
-					var framesAnim = STAGE.intFrameslol[i];
-					var animData = STAGE.animationsData[i];
-					if (STAGE.animated[i]) {
-						for(i in 0... animData.length){
-							object.frames = ModPaths.getBGsAnimated(curPice);
-							var split = STAGE.animationsData[i].split(':');
-							object.animation.addByPrefix(split[0],split[1],framesAnim[0],true);
-							object.animation.play(split[0]);
-						}
-					}
-					else
-						object.loadGraphic(ModPaths.modBGImage(curPice, ModsFreeplayState.mod));
-					var offsets = STAGE.picesOffsets[i];
-					var offsetsScroll = STAGE.scrollOffsets[i];
-					var alphaLol = STAGE.alpha[i];
-					if (STAGE.screenCenter)
-						object.screenCenter();
-					object.x += offsets[0];
-					object.y += offsets[1];
-					object.alpha = alphaLol[0];
-					object.antialiasing = STAGE.antialiasing;
-					object.scrollFactor.set(offsetsScroll[0],offsetsScroll[1]);
-					defaultCamZoom = STAGE.defaultZoom;
-					add(object); //BETA
-				}
-			}
-			else
-				SONG.stage = 'stage_week1';
-		} else
-			setCurrentStage();
+		setCurrentStage();
 
 		trace('Loading characters: ${SONG.player1}, ${SONG.player2}, ${SONG.gfVersion}.');
 		trace('Stage: ${SONG.stage}');
@@ -479,35 +435,6 @@ class PlayState extends MusicBeatState
 		// Shitty layering but whatev it works LOL
 		if (SONG.stage == 'limo')
 			add(limo);
-
-		if (states.ModsFreeplayState.onMods)
-		{
-			if (SONG.player1 != null || openfl.utils.Assets.exists('mods/${ModsFreeplayState.mod}/data/characters/${boyfriend.curCharacter}.json')) {
-				var characterFile:Character.CharacterData = Character.loadFromJson(boyfriend.curCharacter);
-				boyfriend.x = characterFile.xOffset;
-				boyfriend.y = characterFile.yOffset;
-				boyfriend.bfDefaultColor = characterFile.healthBarColor;
-
-				trace('Loaded custom bf json');
-			}
-
-			if (SONG.player2 != null) {
-				SONG.player2 = dad.curCharacter;
-				var characterFile:Character.CharacterData = Character.loadFromJson(dad.curCharacter);
-				dad.x = characterFile.xOffset;
-				dad.y = characterFile.yOffset;
-
-				trace('Loaded custom dad json');
-			}
-
-			if (SONG.gfVersion != null || openfl.utils.Assets.exists('mods/${ModsFreeplayState.mod}/data/characters/${gf.curCharacter}.json')) {
-				var characterFile:Character.CharacterData = Character.loadFromJson(gf.curCharacter);
-				gf.x = characterFile.xOffset;
-				gf.y = characterFile.yOffset;
-				
-				trace('Loaded custom gf json');
-			}
-		}
 
 		add(dad);
 		add(boyfriend);
@@ -1306,10 +1233,7 @@ class PlayState extends MusicBeatState
 			lastReportedPlayheadPosition = 0;
 
 			if (!paused){
-				if(isMod)
-					FlxG.sound.playMusic(ModPaths.getModInst(PlayState.SONG.song, ModsFreeplayState.mod), 1, false);
-				else
-					FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
+				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 			}
 			FlxG.sound.music.onComplete = endSong;
 			vocals.play();
@@ -1338,10 +1262,7 @@ class PlayState extends MusicBeatState
 		curSong = songData.song;
 
 		if (SONG.needsVoices){
-			if(isMod)
-				vocals = new FlxSound().loadEmbedded(ModPaths.getModVoices(PlayState.SONG.song,ModsFreeplayState.mod));
-			else
-				vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
+			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 		}
 		else
 			vocals = new FlxSound();

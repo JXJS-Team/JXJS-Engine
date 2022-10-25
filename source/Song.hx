@@ -1,7 +1,5 @@
 package;
 
-import states.ModsFreeplayState;
-import states.ModsState;
 import Section.SwagSection;
 import lime.utils.Assets;
 
@@ -46,9 +44,6 @@ class Song
 	{
 		var rawJson = null;
 		var songShit:String = ('assets/data/songs/${folder.toLowerCase()}/${jsonInput.toLowerCase()}.json');
-		if(ModsFreeplayState.onMods && ModsState.usableMods[ModsState.modsFolders.indexOf(ModsFreeplayState.mod)] == true)
-			songShit = ('mods/${ModsFreeplayState.mod}/data/songs/${folder.toLowerCase()}/${jsonInput.toLowerCase()}.json');
-
 		if(Assets.exists(songShit))
 			rawJson = Assets.getText(songShit).trim();
 		else{

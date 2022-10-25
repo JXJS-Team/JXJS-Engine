@@ -2,9 +2,7 @@ package;
 
 import haxe.Json;
 import haxe.format.JsonParser;
-import states.ModsFreeplayState;
 import lime.utils.Assets;
-import states.ModsState;
 
 using StringTools;
 
@@ -45,8 +43,6 @@ class StageData {
     public static function loadFromJson(stage:String):StageFile {
         var rawJson = null;
 		var jsonRawFile:String = ('assets/data/stages/$stage.json');
-		if(ModsFreeplayState.onMods && ModsState.usableMods[ModsState.modsFolders.indexOf(ModsFreeplayState.mod)] == true)
-			jsonRawFile = ('mods/${ModsFreeplayState.mod}/data/stages/$stage.json');
 
 		if(Assets.exists(jsonRawFile))
 			rawJson = Assets.getText(jsonRawFile).trim();
