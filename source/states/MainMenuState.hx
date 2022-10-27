@@ -1,5 +1,6 @@
 package states;
 
+import states.awards.AwardsState;
 import states.modding.ModPaths;
 import states.modding.ModViewer;
 import source.states.CoolUtilities;
@@ -37,7 +38,8 @@ class MainMenuState extends MusicBeatState
 	var optionShit:Array<String> = [
 		'story_mode', 
 		'freeplay', 
-		'mods', 
+		'mods',
+		'awards', 
 		#if !switch
 		'options', 
 		'donate', #end
@@ -76,6 +78,8 @@ class MainMenuState extends MusicBeatState
 				#else
 				FlxG.openURL('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game');
 				#end
+			case "awards":
+				FlxG.switchState(new states.awards.AwardsState());
 
 		}
 	}
@@ -84,6 +88,33 @@ class MainMenuState extends MusicBeatState
 	{
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
 		var modStuff:Array<Dynamic> = ModViewer.getModData();
+
+
+		if (FlxG.save.data.usernameAward) {
+			trace("Unlocked Already");
+		} else {
+			trace("Checking Username : " + CoolUtilities.userName());
+			if (CoolUtilities.userName() == "XuelD") {
+				FlxG.save.data.usernameAward = true;
+
+				Config.AcceptText = "Cool!";
+				Config.DeclineText = "Cool!";
+				Config.Title = "Award Unlocked! : UserName Award";
+				Config.onAccept = new states.awards.AwardsState();
+				Config.onDecline = new states.MainMenuState();
+				FlxG.switchState(new others.MenuMessage());
+			}
+
+			// if (CoolUtilities.userName() == "Xuel Dev") {
+			// 	FlxG.save.data.usernameAward = true;
+
+			// 	Config.AcceptText = "Cool!";
+			// 	Config.DeclineText = "Cool!";
+			// 	Config.Title = "Award Unlocked! : UserName Award";
+			// 	Config.onAccept = new states.awards.AwardsState();
+			// 	Config.onDecline = new states.MainMenuState();
+			// }
+		}
 
 		MMScript.onCreate();
 		

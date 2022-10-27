@@ -1,49 +1,50 @@
-package states;
+package states.awards;
 
-import states.CreditsDescriptionState;
-import flixel.FlxCamera.FlxCameraFollowStyle;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.group.FlxSpriteGroup;
-import flixel.FlxState;
-import flixel.FlxG;
-import flixel.FlxSprite;
+import flixel.*;
+import flixel.group.*;
+import flixel.util.*;
 import Alphabet;
-import flixel.util.FlxColor;
+import flixel.tweens.*;
+#if sys
+import sys.FileSystem;
+#end
 
-class CreditState extends FlxState {
-
-    // Item Shit
-
-    public var pisspoop = [
-        "Jotaro",
-        "XuelDev",
-        "Juanen100",
-        "Shygee"
+class AwardsState extends FlxState {
+    public static var awards = [
+        ["Secret Award", "username"]
     ];
 
-    public var descs = [
-        "Programmer, Composer and Artist of Friday Night Funkin : JXJS Engine",
-        "Programmer and Artist of Friday Night Funkin : JXJS Engine",
-        "Programmer of Friday Night Funkin : JXJS Engine",
-        "Programmer of Friday Night Funkin : JXJS Engine"
-    ];
+    public static function unlockAward(key:String){
+        checkReward(key);
+    } 
 
-    public var debug = false;
+    public static function checkReward(reward:String) {
+        switch (reward) {
+            case "username":
+                FlxG.save.data.usernameAward = true;
+                
+        }
+    }
 
-    public var curSelected = 1;
+    public static function resetAwards() {
+        // Put your FlxG save data var and set it to false in this function.
+        FlxG.save.data.usernameAward = false; 
+        
+    }
 
-    public var yShit = 40;
-    public var addBy = 60;
+
+
+
+    public var bg:FlxSprite;
+
+    public var fC = true;
     public var timeBy = 0;
 
     public var id = 1;
 
-    public var fC = true;
+    public var curSelected = 1;
 
-    public var credGroup = new FlxSpriteGroup();
-
-    public var bg:FlxSprite;
+    public var awardGroup = new FlxSpriteGroup();
     
 
 
@@ -52,9 +53,9 @@ class CreditState extends FlxState {
         bg = new FlxSprite().loadGraphic(Paths.image("menu/menuDesat"));
         add(bg);
 
-        for (i in pisspoop) {
+        for (i in awards) {
             if (fC) {
-                var Person = new Alphabet(13, yShit, i, true, false);
+                var Person = new Alphabet(13, 40, i[0], true, false);
                 Person.ID = id;
 
                 FlxTween.tween(Person, {x: 100}, 0.45, {ease: FlxEase.quadOut});
@@ -62,34 +63,24 @@ class CreditState extends FlxState {
                 Person.color = FlxColor.GREEN;
 
                 add(Person);
-                credGroup.add(Person);
+                awardGroup.add(Person);
 
                 // Add da shit
                 id++;
                 timeBy++;
                 fC = false;
             } else {
-                var Person = new Alphabet(13, yShit+addBy*timeBy, i, true, false);
+                var Person = new Alphabet(13, 40+60*timeBy, i[0], true, false);
                 Person.ID = id;
 
                 add(Person);
-                credGroup.add(Person);
+                awardGroup.add(Person);
 
                 // Add da shit
                 id++;
                 timeBy++;
             }
         }
-
-        if (debug == true) {
-            debugIds();
-        }
-    }
-
-    public function debugIds() {
-        credGroup.forEach(function(spr:FlxSprite) {
-            trace("ID : " + spr.ID);
-        });
     }
 
     override public function update(elapsed) {
@@ -103,26 +94,26 @@ class CreditState extends FlxState {
             changeItem("UP");
         }
 
-        if (FlxG.keys.justPressed.ENTER) {
-            var daChoice = curSelected - 1;
-            CreditsDescriptionState.Description = descs[daChoice];
-            FlxG.switchState(new states.CreditsDescriptionState());
+        if (FlxG.keys.justPressed.SHIFT) {
+            resetAwards();
         }
+
+        // if (FlxG.keys.justPressed.ENTER) {
+        //     var daChoice = curSelected - 1;
+        //     CreditsDescriptionState.Description = descs[daChoice];
+        //     FlxG.switchState(new states.CreditsDescriptionState());
+        // }
 
         if (FlxG.keys.justPressed.ESCAPE) {
             FlxG.switchState(new states.MainMenuState());
         }
 
         // credGroup.screenCenter(X);
-
-    
     }
-
-
 
     public function changeItem(way:String) {
         if (way == "DOWN") {
-            if (curSelected == pisspoop.length) {
+            if (curSelected == awards.length) {
                 curSelected = 1;
             } else {
                 curSelected++;
@@ -131,13 +122,13 @@ class CreditState extends FlxState {
 
         if (way == "UP") {
             if (curSelected == 1) {
-                curSelected = pisspoop.length;
+                curSelected = awards.length;
             } else {
                 curSelected = curSelected - 1;
             }
         }
 
-        credGroup.forEach(function(spr:FlxSprite) {
+        awardGroup.forEach(function(spr:FlxSprite) {
             if (spr.ID == curSelected) {
                 FlxTween.tween(spr, {x: 100}, 0.45, {ease: FlxEase.quadOut});
                 spr.color = FlxColor.GREEN;
@@ -149,4 +140,5 @@ class CreditState extends FlxState {
             }
         });
     }
+
 }

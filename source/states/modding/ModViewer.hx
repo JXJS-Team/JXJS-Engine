@@ -3,6 +3,7 @@ package states.modding;
 import lime.utils.Assets;
 import flixel.FlxState;
 import flixel.FlxSprite;
+import flixel.FlxG;
 import Alphabet;
 
 class ModViewer extends FlxState {
@@ -17,7 +18,13 @@ class ModViewer extends FlxState {
         var bg = new FlxSprite().loadGraphic(ModPaths.image('backgrounds/menuBG'));
         add(bg);
 
-        var configStuff = getModData();
+        var configStuff:Array<Dynamic> = getModData();
+
+        var modTitle = new Alphabet(13, 40,configStuff[0], true, false);
+        add(modTitle);
+
+        var modDescription = new Alphabet(13, 100, configStuff[1], true, false);
+        add(modDescription);
 
 
         
@@ -37,8 +44,12 @@ class ModViewer extends FlxState {
 		return swagGoodArray;
     }
 
-    public static function enableModTitle() {
+    public override function update(elapsed) {
+        super.update(elapsed);
 
+        if (FlxG.keys.justPressed.ESCAPE) {
+            FlxG.switchState(new states.MainMenuState());
+        }
     }
     
 }
