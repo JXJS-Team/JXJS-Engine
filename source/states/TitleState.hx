@@ -411,16 +411,16 @@ class TitleState extends states.MusicBeatState
 		logoBl.animation.play('bump');
 		danceLeft = !danceLeft;
 
-		if (danceLeft)
+		/*if (danceLeft)
 			gfDance.animation.play('danceRight');
 		else
-			gfDance.animation.play('danceLeft');
+			gfDance.animation.play('danceLeft');*/
 
 		FlxG.log.add(curBeat);
 
 		FlxTween.tween(FlxG.camera, {zoom:1.02}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
 
-		switch (curBeat)
+		/*switch (curBeat)
 		{
 			case 0:
 				deleteCoolText();
@@ -474,7 +474,7 @@ class TitleState extends states.MusicBeatState
 
 			case 16:
 				skipIntro();
-		}
+		}*/
 	}
 
 	var skippedIntro:Bool = false;
