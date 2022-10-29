@@ -1,14 +1,6 @@
-# [Cool Engine(Legacy)](https://github.com/Manux123/FNF-Cool-Engine)
-
-**FNF': JXJS Engine is a modification of the original FNF' source code the mod includes new Options and better Graphics!!**
-----------------------------------------------
-
-![](/art/iconOG.png)
-----------------------------------------------
-
 ## The JXJS Engine Team Credits
 - [Jotaro-Gaming](https://youtube.com/c/JotaroGamingg) - Programmer and composer Friday Night Funkin: JXJS Engine
-- [XuelDev](https://www.instagram.com/xueldev/) - Programmer Friday Night Funkin : JXJS Engine
+- [XuelDev(Not Active on Project)](https://www.instagram.com/xueldev/) - Programmer Friday Night Funkin : JXJS Engine
 - [Juanen100](https://twitter.com/Juanen1001) - Programmer Friday Night Funkin : JXJS Engine
 
 
