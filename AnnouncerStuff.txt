@@ -1,3 +1,5 @@
-Version 1.01 Changelog:
+Version 1.02 Changelog:
 
-Fixed Version Shit in TitleState.hx
+Fixed OutdatedState.hx bug where it would not check the update correctly,
+Fixed MainMenuState Donate button,
+Changed "Announcement" button to "Changelog".

@@ -13,64 +13,47 @@ import sys.FileSystem;
 
 class OutdatedState extends MusicBeatState
 {
-	public static var leftState:Bool = false;
+	public static var betaVersion = false;
 
-	public static var daVersionNeeded:String = "";
-	
-    public static var daChangelogNeeded:String = "";
-	
-	function userName():String {
-	
-		var env = Sys.environment();
-		if (!env.exists("USERNAME")) {
-			return "Guest";
+	public static var version = MainMenuState.jxjsEngineVersion;
+	public static var versionNeeded:Dynamic = null;
+
+	public var text:FlxText;
+
+	override public function create() {
+
+		if (betaVersion) {
+			text = new FlxText(0,0,0,"Your version of JXJS Engine is a beta version." 
+			+ "\nCurrent Version : " + version
+			+ "\nIf there is any bugs with this build please report these bugs to the developers."
+			+ "\n\nPress Space to check for the lastest build, Press ESC to ignore this message."
+			, 16);
+			
+		} else {
+			text = new FlxText(0,0,0,"Your version of JXJS Engine is outdated." 
+			+ "\nCurrent Version : " + version
+			+ "\nMost Recent Version : " + versionNeeded
+			+ "\n\nPress Space to check for the lastest build, Press ESC to ignore this message."
+			, 16);
 		}
-		return env["USERNAME"];
+
+		text.screenCenter();
+		add(text);
+
 	}
 
-	override function create()
-	{
-		super.create();
-		var bg:FlxSprite = new FlxSprite().loadGraphic("assets/images/menu/menuBGLoading");
-		add(bg);
-		var ver = Application.current.meta.get('version');
-	    var txt:FlxText = new FlxText(0, 0, FlxG.width,
-		"HEY! You're running an outdated version of the Cool Engine!\nYour current version is "
-		+ ver
-		+ " while the most recent version is "
-		+ daVersionNeeded
-		+ " here are the features youre missing on\n"
-		+ daChangelogNeeded		      
-		+ "\n Press Space to go the GitHub page, or ESCAPE to ignore this.",
-		32);
-		txt.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
-		txt.screenCenter();
-		add(txt);
+	override public function update(elapsed) {
+		if (FlxG.keys.justPressed.ESCAPE) {
+			FlxG.switchState(new states.MainMenuState());
+		}
 
-		var leDate = Date.now();
-		if (leDate.getMonth() == 10 && leDate.getDay() == 31)
-		{
-			txt.text = "HEY!" + userName() + "You're running an outdated version of the Cool Engine!\nYour current version is "
-			+ ver
-			+ " while the most recent version is "
-			+ daVersionNeeded
-			+ " here are the features youre missing on\n"
-			+ daChangelogNeeded		      
-			+ "\n Press Space to go the GitHub page, or ESCAPE to ignore this.";
+		if (FlxG.keys.justReleased.SPACE) {
+			#if linux
+			Sys.command('/usr/bin/xdg-open', ["https://github.com/JXJS-Team/JXJS-Engine/releases/latest", "&"]);
+			#else
+			FlxG.openURL('https://github.com/JXJS-Team/JXJS-Engine/releases/latest');
+			#end
 		}
 	}
 
-	override function update(elapsed:Float)
-	{
-		if (controls.ACCEPT)
-		{
-			FlxG.openURL("https://github.com/Manux123/FNF-Cool-Engine");
-		}
-		if (controls.BACK)
-		{
-			leftState = true;
-			FlxG.switchState(new MainMenuState());
-		}
-		super.update(elapsed);
-	}
 }

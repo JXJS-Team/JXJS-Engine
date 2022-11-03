@@ -19,11 +19,11 @@ class MainMenuState extends MusicBeatState {
 		"Credits",
         "Awards",
 		"Options",
-		"Announcements",
+		"Changelog",
 		"Donate"
     ];
 
-    public static var jxjsEngineVersion = "1.01";
+    public static var jxjsEngineVersion = "1.02";
 
     public var debug = false;
 
@@ -55,9 +55,14 @@ class MainMenuState extends MusicBeatState {
                 FlxG.switchState(new states.awards.AwardsState());
             case "Options":
                 FlxG.switchState(new states.OptionsMenuState());
-            case "Announcements":
+            case "Changelog":
                 // FlxG.switchState(new states.AnnouncementState());
                 FlxG.switchState(new states.AnnouncementState());
+            case "Donate":
+                #if linux
+                #else
+                FlxG.openURL('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game');
+                #end
         }
     }
 

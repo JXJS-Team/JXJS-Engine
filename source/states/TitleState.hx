@@ -301,17 +301,18 @@ class TitleState extends states.MusicBeatState
 			{
 				// Check if version is outdated
 				var http = new haxe.Http("https://raw.githubusercontent.com/JXJS-Team/JXJS-Engine/main/ver.thing");
-				var returnedData:Array<String> = [];
-				var version:String = Application.current.meta.get('version');
 
 				http.onData = function(data:String)
 				{
 					if (data > MainMenuState.jxjsEngineVersion) {
 						trace("Poor dood is outdated");
+						OutdatedState.betaVersion = false;
+						OutdatedState.versionNeeded = data;
 						FlxG.switchState(new states.OutdatedState());
 					} else if (data < MainMenuState.jxjsEngineVersion) {
 						trace("Cool Dood is on a beta version");
-						FlxG.switchState(new states.MainMenuState());
+						OutdatedState.betaVersion = true;
+						FlxG.switchState(new states.OutdatedState());
 					} else if (data == MainMenuState.jxjsEngineVersion) {
 						FlxG.switchState(new states.MainMenuState());
 					}
