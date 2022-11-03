@@ -1,5 +1,6 @@
 package states;
 
+import modding.ModPaths;
 import states.CacheState.ImageCache;
 #if desktop
 import Discord.DiscordClient;
@@ -51,6 +52,7 @@ class TitleState extends states.MusicBeatState
 	//var curWacky:Array<String> = [];
 
 	var wackyImage:FlxSprite;
+
 
 	override public function create():Void
 	{
@@ -493,7 +495,7 @@ class TitleState extends states.MusicBeatState
 			// credTextShit.text = 'In association \nwith';
 			// credTextShit.screenCenter();
 			case 5:
-				createCoolText(['Cool Engine Team']);
+				createCoolText(['JXJS Engine Team']);
 			case 7:
 				addMoreText('Jotaro', 15);
 				addMoreText('XuelDev', 15);
