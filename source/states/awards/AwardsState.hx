@@ -1,6 +1,6 @@
 package states.awards;
 
-import states.modding.USure;
+// import states.modding.USure;
 import flixel.*;
 import flixel.group.*;
 import flixel.util.*;
@@ -96,7 +96,8 @@ class AwardsState extends FlxState {
         }
 
         if (FlxG.keys.justPressed.SHIFT) {
-            USure.setStates(new states.awards.ClearState(), new states.awards.AwardsState());
+            // USure.setStates(new states.awards.ClearState(), new states.awards.AwardsState());
+            FlxG.switchState(new states.awards.ClearState());
         }
 
         // if (FlxG.keys.justPressed.ENTER) {

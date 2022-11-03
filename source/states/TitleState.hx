@@ -234,29 +234,29 @@ class TitleState extends states.MusicBeatState
 		}
 		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
 
-		if (start) {
-			var Timer:FlxTimer = new FlxTimer().start(0.1, function(timer:FlxTimer) {
-				if (startNut == 0) {
-					credTextShit.visible = true;
-					credTextShit.text = "Manux123\nJloor\nChasetodie\nJontoro\nOverchargedDev\nFairyBoy\nZeroArtist\nJuanen100\nXuelDev";
-					credTextShit.screenCenter();
+		// if (start) {
+		// 	var Timer:FlxTimer = new FlxTimer().start(0.1, function(timer:FlxTimer) {
+		// 		if (startNut == 0) {
+		// 			credTextShit.visible = true;
+		// 			credTextShit.text = "Manux123\nJloor\nChasetodie\nJontoro\nOverchargedDev\nFairyBoy\nZeroArtist\nJuanen100\nXuelDev";
+		// 			credTextShit.screenCenter();
 
-					timer.start(timerWait, function(timer:FlxTimer) {
-						credTextShit.text = "Present";
-						credTextShit.screenCenter();
+		// 			timer.start(timerWait, function(timer:FlxTimer) {
+		// 				credTextShit.text = "Present";
+		// 				credTextShit.screenCenter();
 
-						timer.start(timerWait, function(timer:FlxTimer) {
-							credTextShit.text = "The Cool Engine!";
-							credTextShit.screenCenter();
+		// 				timer.start(timerWait, function(timer:FlxTimer) {
+		// 					credTextShit.text = "The Cool Engine!";
+		// 					credTextShit.screenCenter();
 
-							timer.start(1, function(timer:FlxTimer) {
-								skipIntro();
-							});
-						});
-					});
-				}
-			});
-		}
+		// 					timer.start(1, function(timer:FlxTimer) {
+		// 						skipIntro();
+		// 					});
+		// 				});
+		// 			});
+		// 		}
+		// 	});
+		// }
 
 		if (FlxG.keys.justPressed.F11)
 		{
@@ -475,6 +475,63 @@ class TitleState extends states.MusicBeatState
 			case 16:
 				skipIntro();
 		}*/
+
+		switch (curBeat)
+		{
+			case 0:
+				deleteCoolText();
+			case 1:
+				createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
+			// credTextShit.visible = true;
+			case 3:
+				addMoreText('present');
+			// credTextShit.text += '\npresent...';
+			// credTextShit.addText();
+			case 4:
+				deleteCoolText();
+			// credTextShit.visible = false;
+			// credTextShit.text = 'In association \nwith';
+			// credTextShit.screenCenter();
+			case 5:
+				createCoolText(['Cool Engine Team']);
+			case 7:
+				addMoreText('Jotaro', 15);
+				addMoreText('XuelDev', 15);
+				addMoreText('Juanen100', 15);
+				addMoreText('Shygee', 15);
+				
+			case 8:
+				deleteCoolText();
+				ngSpr.visible = true;
+			// credTextShit.visible = false;
+
+			// credTextShit.text = 'Shoutouts Tom Fulp';
+			// credTextShit.screenCenter();
+			case 9:
+				ngSpr.visible = false;
+				random = FlxG.random.int(0,randomString.length);
+				createCoolText([randomString[random]]);
+			// credTextShit.visible = true;
+			case 11:
+				addMoreText(randomString2[random]);
+			// credTextShit.text += '\nlmao';
+			case 12:
+				deleteCoolText();
+			// credTextShit.visible = false;
+			// credTextShit.text = "Friday";
+			// credTextShit.screenCenter();
+			case 13:
+				addMoreText('Friday');
+			// credTextShit.visible = true;
+			case 14:
+				addMoreText('Night');
+			// credTextShit.text += '\nNight';
+			case 15:
+				addMoreText("Funkin"); // credTextShit.text += '\nFunkin';
+
+			case 16:
+				skipIntro();
+		}
 	}
 
 	var skippedIntro:Bool = false;
