@@ -19,13 +19,21 @@ class AnnouncementState extends FlxState {
         background = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
         add(background);
 
-        var http = new haxe.Http("https://raw.githubusercontent.com/Manux123/FNF-Cool-Engine/master/ver.thing");
+        var http = new haxe.Http("https://raw.githubusercontent.com/JXJS-Team/JXJS-Engine/main/AnnouncerStuff.txt");
         var returnedData:Array<String> = [];
 
         http.onData = function(data:String) {
-            announcementText = new FlxText(0,0,0,data,16);
-            announcementText.screenCenter();
-            add(announcementText);
+            if (data == "") {
+                announcementText = new FlxText(0,0,0,"There are no new announcements.",16);
+                announcementText.screenCenter();
+                add(announcementText);
+            } else {
+                announcementText = new FlxText(0,0,0,data,16);
+                announcementText.screenCenter();
+                add(announcementText);
+            }
+
+
         }
 
         http.onError = function(error)
