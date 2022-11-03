@@ -2,4 +2,5 @@ Version 1.02 Changelog:
 
 Fixed OutdatedState.hx bug where it would not check the update correctly,
 Fixed MainMenuState Donate button,
-Changed "Announcement" button to "Changelog".
+Changed "Announcement" button to "Changelog",
+Fixed CurSelected glitch in MainMenuState.

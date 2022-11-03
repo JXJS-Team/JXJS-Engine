@@ -15,6 +15,8 @@ class AnnouncementState extends FlxState {
 
     var exitState:FlxText;
 
+    public var size = 15;
+
     public var announcementText:FlxText;
 
     override public function create() {
@@ -34,12 +36,12 @@ class AnnouncementState extends FlxState {
 
         http.onData = function(data:String) {
             if (data == "") {
-                announcementText = new FlxText(0,0,0,"There are no new announcements. \n Press SPACE to recheck.",30);
+                announcementText = new FlxText(0,0,0,"There are no new announcements. \n Press SPACE to recheck.",size);
                 announcementText.color = FlxColor.BLACK;
                 announcementText.screenCenter();
                 add(announcementText);
             } else {
-                announcementText = new FlxText(0,0,0,data,30);
+                announcementText = new FlxText(0,0,0,data,size);
                 announcementText.screenCenter();
                 announcementText.color = FlxColor.BLACK;
                 add(announcementText);
@@ -67,12 +69,12 @@ class AnnouncementState extends FlxState {
 
             http.onData = function(data:String) {
                 if (data == "") {
-                    announcementText = new FlxText(0,0,0,"There are no new announcements. \n Press SPACE to recheck.",30);
+                    announcementText = new FlxText(0,0,0,"There are no new announcements. \n Press SPACE to recheck.",size);
                     announcementText.color = FlxColor.BLACK;
                     announcementText.screenCenter();
                     add(announcementText);
                 } else {
-                    announcementText = new FlxText(0,0,0,data,30);
+                    announcementText = new FlxText(0,0,0,data,size);
                     announcementText.screenCenter();
                     announcementText.color = FlxColor.BLACK;
                     add(announcementText);

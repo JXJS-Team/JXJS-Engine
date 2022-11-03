@@ -150,7 +150,7 @@ class MainMenuState extends MusicBeatState {
     public function changeItem(way:String) {
         if (way == "DOWN") {
             if (curSelected == pisspoop.length) {
-                curSelected = 0;
+                curSelected = 1;
             } else {
                 curSelected++;
             }
