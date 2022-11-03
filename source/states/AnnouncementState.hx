@@ -61,6 +61,7 @@ class AnnouncementState extends FlxState {
 
     override public function update(elapsed) {
         if (FlxG.keys.justPressed.SPACE) {
+            trace("Updating...");
             remove(announcementText);
             var http = new haxe.Http("https://raw.githubusercontent.com/JXJS-Team/JXJS-Engine/main/AnnouncerStuff.txt");
 
