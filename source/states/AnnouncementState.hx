@@ -13,11 +13,22 @@ import flixel.util.FlxColor;
 class AnnouncementState extends FlxState {
     public var background:FlxSprite;
 
+    var exitState:FlxText;
+
     public var announcementText:FlxText;
 
     override public function create() {
         background = new FlxSprite().loadGraphic(Paths.image('menu/menuDesat'));
         add(background);
+
+        exitState = new FlxText(0, 0, 0, "ESC to exit", 12);
+		exitState.size = 28;
+		exitState.y += 35;
+		exitState.scrollFactor.set();
+		exitState.screenCenter(X);
+		exitState.setFormat("VCR OSD Mono", 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(exitState);
+
 
         var http = new haxe.Http("https://raw.githubusercontent.com/JXJS-Team/JXJS-Engine/main/AnnouncerStuff.txt");
 

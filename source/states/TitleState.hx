@@ -305,25 +305,20 @@ class TitleState extends states.MusicBeatState
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
 				// Check if version is outdated
-				var http = new haxe.Http("https://raw.githubusercontent.com/Manux123/FNF-Cool-Engine/master/ver.thing");
+				var http = new haxe.Http("https://raw.githubusercontent.com/JXJS-Team/JXJS-Engine/main/ver.thing");
 				var returnedData:Array<String> = [];
 				var version:String = Application.current.meta.get('version');
 
 				http.onData = function(data:String)
 				{
-					returnedData[0] = data.substring(0, data.indexOf('-'));
-					returnedData[1] = data.substring(data.indexOf('+'), data.length);
-					if (!version.contains(returnedData[0].trim()) && !OutdatedState.leftState)
-					{
-						trace('Poor guy, he is outdated');
-						OutdatedState.daVersionNeeded = returnedData[0];
-						OutdatedState.daChangelogNeeded = returnedData[1];
-						FlxG.switchState(new OutdatedState());
-					}
-					else
-					{
-						//FlxG.switchState(new states.VideoState('test/sus',new states.PlayState()));
-						FlxG.switchState(new MainMenuState());
+					if (data > MainMenuState.jxjsEngineVersion) {
+						trace("Poor dood is outdated");
+						FlxG.switchState(new states.OutdatedState());
+					} else if (data < MainMenuState.jxjsEngineVersion) {
+						trace("Cool Dood is on a beta version");
+						FlxG.switchState(new states.MainMenuState());
+					} else if (data == MainMenuState.jxjsEngineVersion) {
+						FlxG.switchState(new states.MainMenuState());
 					}
 				}
 

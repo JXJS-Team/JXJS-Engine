@@ -1,1 +1,5 @@
-Announcements Now work!
+Version 1.0 Changelog:
+
+Added Fade in to MainMenuState,
+Fixed TitleState "Cool Engine Team" bug
+Added "ESC TO EXIT" text to AnnouncementState.hx

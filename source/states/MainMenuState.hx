@@ -23,6 +23,8 @@ class MainMenuState extends MusicBeatState {
 		"Donate"
     ];
 
+    public static var jxjsEngineVersion = "1.0";
+
     public var debug = false;
 
     public var curSelected = 1;
@@ -60,6 +62,10 @@ class MainMenuState extends MusicBeatState {
     }
 
     override public function create() {
+
+        FlxG.camera.fade(FlxColor.BLACK, 0.6, true, function() {
+            return true;
+        });
 
         bg = new FlxSprite().loadGraphic(Paths.image("menu/menuBG"));
         add(bg);
@@ -119,6 +125,10 @@ class MainMenuState extends MusicBeatState {
         {
             loadState();
 		}
+
+        if (FlxG.keys.justPressed.ESCAPE) {
+            FlxG.switchState(new states.TitleState());
+        }
 
         if (FlxG.keys.justPressed.ESCAPE) {
             FlxG.switchState(new states.MainMenuState());
