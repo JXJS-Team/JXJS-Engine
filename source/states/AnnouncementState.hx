@@ -28,7 +28,7 @@ class AnnouncementState extends FlxState {
                 announcementText.screenCenter();
                 add(announcementText);
             } else {
-                announcementText = new FlxText(0,0,0,data,16);
+                announcementText = new FlxText(0,0,0,data,30);
                 announcementText.screenCenter();
                 announcementText.color = FlxColor.BLACK;
                 add(announcementText);
@@ -60,7 +60,7 @@ class AnnouncementState extends FlxState {
                     announcementText.screenCenter();
                     add(announcementText);
                 } else {
-                    announcementText = new FlxText(0,0,0,data,16);
+                    announcementText = new FlxText(0,0,0,data,30);
                     announcementText.screenCenter();
                     announcementText.color = FlxColor.BLACK;
                     add(announcementText);
