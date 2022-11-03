@@ -60,6 +60,7 @@ class MainMenuState extends MusicBeatState {
                 FlxG.switchState(new states.AnnouncementState());
             case "Donate":
                 #if linux
+                Sys.command('/usr/bin/xdg-open', ["https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game", "&"]);
                 #else
                 FlxG.openURL('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game');
                 #end
