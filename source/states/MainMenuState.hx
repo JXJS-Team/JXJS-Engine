@@ -23,7 +23,7 @@ class MainMenuState extends MusicBeatState {
 		"Donate"
     ];
 
-    public static var jxjsEngineVersion = "1.0";
+    public static var jxjsEngineVersion = "1.01";
 
     public var debug = false;
 

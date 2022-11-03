@@ -1,5 +1,3 @@
-Version 1.0 Changelog:
+Version 1.01 Changelog:
 
-Added Fade in to MainMenuState,
-Fixed TitleState "Cool Engine Team" bug
-Added "ESC TO EXIT" text to AnnouncementState.hx
+Fixed Version Shit in TitleState.hx

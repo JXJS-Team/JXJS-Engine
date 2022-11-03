@@ -107,11 +107,6 @@ class TitleState extends states.MusicBeatState
 		DiscordClient.initialize();
 		#end
 
-		var versionShit2 = new FlxText(5, FlxG.height - 9, 0, 'JXJS Engine - V${Application.current.meta.get('version')}', 12);
-		versionShit2.scrollFactor.set();
-		versionShit2.setFormat(Paths.font("Funkin.otf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		versionShit2.y -= 20;
-		add(versionShit2);
 	}
 
 	var logoBl:FlxSprite;
