@@ -1,7 +1,7 @@
 ## The JXJS Engine Team Credits
 - [Jotaro-Gaming](https://youtube.com/c/JotaroGamingg) - Programmer and composer Friday Night Funkin: JXJS Engine
 - [XuelDev](https://www.instagram.com/xueldev/) - Programmer Friday Night Funkin : JXJS Engine
-- [Juanen100](https://twitter.com/Juanen1001) - Programmer Friday Night Funkin : JXJS Engine
+- [Juanen100](https://twitter.com/Juanen100) - Programmer Friday Night Funkin : JXJS Engine
 
 
 ## FNF
