@@ -1,6 +1,10 @@
-Version 1.02 Changelog:
+Version 0.45 Changelog: 
 
-Fixed OutdatedState.hx bug where it would not check the update correctly,
-Fixed MainMenuState Donate button,
-Changed "Announcement" button to "Changelog",
-Fixed CurSelected glitch in MainMenuState.
+- Reverted MainMenuState (Cuz we got artists now :) ),
+- Removed ModsMenuState features from MainMenuState, 
+- ChangeLog icon is missing (Please wait for that)
+
+Other Shit:
+
+- MainMenuState's optionMap is a pain in my ass cuz when ever I tried to use it, it allways used to throw errors at me.
+But I know how it works now :) lol.

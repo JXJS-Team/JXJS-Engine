@@ -10,7 +10,7 @@ import flixel.FlxSprite;
 import Alphabet;
 import flixel.util.FlxColor;
 
-class AnnouncementState extends FlxState {
+class AnnouncementState extends MusicBeatState {
     public var background:FlxSprite;
 
     var exitState:FlxText;

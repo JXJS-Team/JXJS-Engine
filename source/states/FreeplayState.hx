@@ -209,11 +209,11 @@ class FreeplayState extends states.MusicBeatState
 		text.scrollFactor.set();
 		add(text);
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 19, 0, "FNF JXJS Engine - v" + Application.current.meta.get('version'), 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("assets/fonts/Funkin.otf", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		// add(versionShit);
-		super.create();
+		// var versionShit:FlxText = new FlxText(5, FlxG.height - 19, 0, "FNF JXJS Engine - v" + Application.current.meta.get('version'), 12);
+		// versionShit.scrollFactor.set();
+		// versionShit.setFormat("assets/fonts/Funkin.otf", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		// // add(versionShit);
+		// super.create();
 
 		#if mobileC
 		addVirtualPad(FULL, A_B);

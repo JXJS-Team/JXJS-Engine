@@ -108,8 +108,7 @@
 	
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
 	<!-- <template path='mods' /> -->
-	
-	<assets path="CHANGELOG.md" rename='changelog.txt'/>
+	<!-- <assets path="CHANGELOG.md" rename='changelog.txt'/> --> -->
 
 	<assets path="NoteSkinSupport.txt" rename='note skin guide.txt'/>
 
