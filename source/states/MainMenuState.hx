@@ -33,7 +33,7 @@ class MainMenuState extends MusicBeatState
 	public static var menuItems:FlxTypedGroup<FlxSprite>;
 
 	var optionShit:Array<String> = [
-		'story-mode', 
+		'story_mode', 
 		'freeplay', 
 		#if !switch
 		'options', 
@@ -42,7 +42,7 @@ class MainMenuState extends MusicBeatState
 	];
 
 	var optionMap:Map<String,MusicBeatState> = [
-		'story-mode' => new StoryMenuState(),
+		'story_mode' => new StoryMenuState(),
 		'freeplay' => new FreeplayState(),
 		'options' => new OptionsMenuState(),
         'changelog' => new states.AnnouncementState()
